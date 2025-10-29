@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CrediApp - Sistema profesional de gestión de créditos y pagos. Controla tu negocio de manera eficiente.">
+    <meta name="keywords" content="créditos, pagos, gestión, sistema, software, préstamos">
+    <title>CrediApp - Sistema de Gestión de Créditos y Pagos</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6610f2;
+            --success-color: #198754;
+            --info-color: #0dcaf0;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        /* Navbar */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .navbar-brand i {
+            font-size: 2rem;
+            color: #667eea;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-primary);
+            padding: 150px 0 100px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path fill="rgba(255,255,255,0.05)" d="M0,300 Q300,100 600,300 T1200,300 L1200,600 L0,600 Z"/></svg>');
+            background-size: cover;
+            opacity: 0.5;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+        
+        .hero-buttons .btn {
+            margin: 0.5rem;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-download {
+            background: white;
+            color: #667eea;
+            border: none;
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: #667eea;
+        }
+        
+        .btn-demo {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-demo:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .hero-image {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            background: var(--light-color);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 4rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .feature-card:nth-child(2) .feature-icon {
+            background: var(--gradient-secondary);
+        }
+        
+        .feature-card:nth-child(3) .feature-icon {
+            background: var(--gradient-success);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .feature-description {
+            color: #6c757d;
+            line-height: 1.7;
+        }
+        
+        /* Modules Section */
+        .modules-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .module-item {
+            background: var(--light-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .module-item:hover {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .module-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-right: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .module-content h4 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .module-content p {
+            margin: 0;
+            color: #6c757d;
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><circle cx="200" cy="150" r="100" fill="rgba(255,255,255,0.05)"/><circle cx="800" cy="400" r="150" fill="rgba(255,255,255,0.05)"/><circle cx="1000" cy="100" r="80" fill="rgba(255,255,255,0.05)"/></svg>');
+            opacity: 0.5;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            color: var(--dark-color);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            max-width: 500px;
+            margin: 0 auto;
+            border: 3px solid rgba(255,255,255,0.5);
+        }
+        
+        .pricing-badge {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .pricing-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-price {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-price sup {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .pricing-period {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        
+        .pricing-features li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features li i {
+            color: var(--success-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .pricing-cta {
+            margin-top: 2rem;
+        }
+        
+        .pricing-cta .btn {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary-custom {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: var(--light-color);
+        }
+        
+        .cta-card {
+            background: white;
+            border-radius: 30px;
+            padding: 4rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 2.5rem;
+        }
+        
+        .cta-buttons .btn {
+            margin: 0.5rem;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+        }
+        
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.7);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            }
+            50% {
+                box-shadow: 0 5px 30px rgba(37, 211, 102, 0.8);
+            }
+            100% {
+                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            }
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-social {
+            margin: 1.5rem 0;
+        }
+        
+        .footer-social a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+        
+        .footer-copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .pricing-price {
+                font-size: 3rem;
+            }
+            
+            .hero-buttons .btn {
+                display: block;
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+            
+            .whatsapp-float {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-currency-dollar"></i>
+                <strong>CrediApp</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#caracteristicas">Características</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#modulos">Módulos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#precios">Precios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white px-4 ms-2" href="#descargar">Descargar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content fade-in">
+                    <h1 class="hero-title">
+                        Gestiona tus Créditos<br>
+                        de Forma <span style="text-decoration: underline;">Profesional</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        El sistema más completo para administrar créditos, clientes y pagos.
+                        Simple, rápido y seguro.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://elmenudeyosef.com/crediapp-desktop/releases/download/v1.1.0/CrediAppDesktop.zip" 
+                           class="btn btn-download btn-lg" 
+                           download>
+                            <i class="bi bi-download me-2"></i>
+                            Descargar Gratis
+                        </a>
+                        <a href="https://wa.me/584128799230?text=Hola%2C%20quiero%20solicitar%20una%20demo%20de%20CrediApp" 
+                           class="btn btn-demo btn-lg" 
+                           target="_blank">
+                            <i class="bi bi-whatsapp me-2"></i>
+                            Solicitar Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 hero-image d-none d-lg-block">
+                    <img src="https://img.icons8.com/fluency/512/accounting.png" 
+                         alt="CrediApp Dashboard" 
+                         class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="caracteristicas" class="features-section">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegir CrediApp?</h2>
+            <p class="section-subtitle">
+                Una solución completa diseñada para hacer tu trabajo más fácil
+            </p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <h3 class="feature-title">Rápido y Eficiente</h3>
+                        <p class="feature-description">
+                            Interfaz intuitiva que te permite gestionar todo en segundos. 
+                            Sin complicaciones, sin curvas de aprendizaje extensas.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3 class="feature-title">100% Seguro</h3>
+                        <p class="feature-description">
+                            Tus datos protegidos con las mejores prácticas de seguridad. 
+                            Control de acceso y respaldos automáticos.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h3 class="feature-title">Reportes Detallados</h3>
+                        <p class="feature-description">
+                            Estadísticas en tiempo real, gráficos claros y reportes 
+                            personalizables para tomar mejores decisiones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modules Section -->
+    <section id="modulos" class="modules-section">
+        <div class="container">
+            <h2 class="section-title">Funcionalidades Completas</h2>
+            <p class="section-subtitle">
+                Todo lo que necesitas en un solo lugar
+            </p>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="module-item">
+                        <div class="module-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="module-content">
+                            <h4>Gestión de Clientes</h4>
+                            <p>Registra y administra toda la información de tus clientes de forma organizada</p>
+                        </div>
+                    </div>
+                    
+                    <div class="module-item">
+                        <div class="module-icon">
+                            <i class="bi bi-cash-stack"></i>
+                        </div>
+                        <div class="module-content">
+                            <h4>Control de Créditos</h4>
+                            <p>Crea, edita y monitorea todos tus créditos con cálculos automáticos</p>
+                        </div>
+                    </div>
+                    
+                    <div class="module-item">
+                        <div class="module-icon">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+                        <div class="module-content">
+                            <h4>Créditos Vigentes</h4>
+                            <p>Visualiza todos los créditos activos y al día en tiempo real</p>
+                        </div>
+                    </div>
+                    
+                    <div class="module-item">
+                        <div class="module-icon">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                        </div>
+                        <div class="module-content">
+                            <h4>Alertas de Vencimiento</h4>
+                            <p>Notificaciones automáticas de créditos próximos a vencer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="module-item">
+                        <div class="module-icon">
+                            <i class="bi bi-calendar-x-fill"></i>
+                        </div>
+                        <div class="module-content">
+                            <h4>Gestión de Vencidos</h4>
+                            <p>Control especial para créditos vencidos con integración a WhatsApp</p>
+                        </div>
+                    </div>
+                    
+                    <div class="module-item">
+                        <div class="module-icon">
+                            <i class="bi bi-wallet2"></i>
+                        </div>
+                        <div class="module-content">
+                            <h4>Registro de Pagos</h4>
+                            <p>Registra pagos parciales o totales con actualización automática de saldos</p>
+                        </div>
+                    </div>
+                    
+                    <div class="module-item">
+                        <div class="module-icon">
+                            <i class="bi bi-file-earmark-bar-graph"></i>
+                        </div>
+                        <div class="module-content">
+                            <h4>Reportes y Exportación</h4>
+                            <p>Genera reportes PDF y exporta datos a Excel o CSV</p>
+                        </div>
+                    </div>
+                    
+                    <div class="module-item">
+                        <div class="module-icon">
+                            <i class="bi bi-pie-chart-fill"></i>
+                        </div>
+                        <div class="module-content">
+                            <h4>Dashboard con Estadísticas</h4>
+                            <p>Panel principal con métricas clave y gráficos interactivos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precios" class="pricing-section">
+        <div class="container">
+            <h2 class="section-title text-white mb-5">Precio Transparente y Accesible</h2>
+            
+            <div class="pricing-card">
+                <span class="pricing-badge">
+                    <i class="bi bi-star-fill me-2"></i>
+                    Plan Mensual
+                </span>
+                
+                <h3 class="pricing-title">CrediApp Desktop</h3>
+                
+                <div class="pricing-price">
+                    <sup>$</sup>30
+                </div>
+                
+                <p class="pricing-period">por mes / por usuario</p>
+                
+                <ul class="pricing-features">
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Gestión ilimitada de clientes
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Créditos y pagos sin límites
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Reportes y exportaciones
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Actualizaciones automáticas
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Soporte técnico por WhatsApp
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Respaldos automáticos
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Sin costos de instalación
+                    </li>
+                    <li>
+                        <i class="bi bi-check-circle-fill"></i>
+                        Cancela cuando quieras
+                    </li>
+                </ul>
+                
+                <div class="pricing-cta">
+                    <a href="https://wa.me/584128799230?text=Hola%2C%20quiero%20suscribirme%20a%20CrediApp%20por%20%2430%2Fmes" 
+                       class="btn btn-primary-custom" 
+                       target="_blank">
+                        <i class="bi bi-whatsapp me-2"></i>
+                        Suscribirme Ahora
+                    </a>
+                </div>
+                
+                <p class="text-muted mt-3 mb-0">
+                    <small>
+                        <i class="bi bi-shield-check me-1"></i>
+                        Pago seguro. Sin permanencia. Cancela cuando quieras.
+                    </small>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="descargar" class="cta-section">
+        <div class="container">
+            <div class="cta-card">
+                <h2 class="cta-title">
+                    ¿Listo para transformar tu negocio?
+                </h2>
+                <p class="cta-description">
+                    Descarga CrediApp ahora y empieza a gestionar tus créditos de forma profesional.
+                    ¡Es gratis probar! Paga solo si decides continuar.
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://elmenudeyosef.com/crediapp-desktop/releases/download/v1.1.0/CrediAppDesktop.zip" 
+                       class="btn btn-primary btn-lg" 
+                       download>
+                        <i class="bi bi-windows me-2"></i>
+                        <i class="bi bi-download me-2"></i>
+                        Descargar para Windows
+                    </a>
+                    <a href="https://wa.me/584128799230?text=Hola%2C%20quiero%20solicitar%20una%20demo%20gratuita%20de%20CrediApp" 
+                       class="btn btn-success btn-lg" 
+                       target="_blank">
+                        <i class="bi bi-whatsapp me-2"></i>
+                        Solicitar Demo Gratis
+                    </a>
+                </div>
+                <p class="text-muted mt-4">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Compatible con Windows 7/8/10/11 | Versión actual: 1.1.0
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="footer-title">
+                    <i class="bi bi-currency-dollar"></i>
+                    CrediApp
+                </h3>
+                <p>Sistema profesional de gestión de créditos y pagos</p>
+                
+                <div class="footer-social">
+                    <a href="https://wa.me/584128799230" target="_blank" title="WhatsApp">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                    <a href="mailto:soinfex@gmail.com" title="Email">
+                        <i class="bi bi-envelope-fill"></i>
+                    </a>
+                    <a href="https://www.facebook.com/SoinfexStore" target="_blank" title="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/soinfex/" target="_blank" title="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+                
+                <div class="footer-info">
+                    <p>
+                        <i class="bi bi-telephone-fill me-2"></i>
+                        +58 412-879-9230
+                    </p>
+                    <p>
+                        <i class="bi bi-envelope-fill me-2"></i>
+                        soinfex@gmail.com
+                    </p>
+                    <p>
+                        <i class="bi bi-clock-fill me-2"></i>
+                        Lun-Vie: 8AM-6PM | Sáb: 9AM-2PM
+                    </p>
+                </div>
+                
+                <div class="footer-copyright">
+                    <p>&copy; 2025 CrediApp. Todos los derechos reservados.</p>
+                    <p>
+                        <small>
+                            Desarrollado con <i class="bi bi-heart-fill text-danger"></i> 
+                            para simplificar la gestión de tu negocio
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/584128799230?text=Hola%2C%20tengo%20una%20consulta%20sobre%20CrediApp" 
+       class="whatsapp-float" 
+       target="_blank"
+       title="Chatea con nosotros por WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Smooth scroll for navbar links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 5px 30px rgba(0,0,0,0.15)';
+            } else {
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
+            }
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .module-item, .pricing-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+
